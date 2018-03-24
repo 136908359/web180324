@@ -1,0 +1,63 @@
+<div class="page-container">
+	<form class="form-horizontal" method="post" action="/v1/picdata/golds">			
+			<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>玩家ID</th>
+					<th>姓名</th>
+					<th>金额</th>
+					<th>日期</th>
+					<th witch="20%"></th>					
+				</tr>
+			</thead>
+			<?php foreach($list as $row):?>
+				<tr>				
+					<td><?php echo $row['id']; ?></td>
+					<td><?php echo $row['uid']; ?></td>
+					<td><?php echo @$row['name']; ?></td>
+					<td><?php echo $row['apply_rmb']; ?></td>
+					<td><?php echo $row['apply_time']; ?></td>
+					<?php if ( $row["status"] == 0 ): ?>
+					<td id ="td_choice_<?php echo $row["id"];?>" class="td-manage">
+						<a id="a_choice_agree_<?php echo $row["id"];?>",title="同意" href="javascript:void(0)">同意</a>	
+						<a id="a_choice_refuse_<?php echo $row["id"];?>",title="拒绝" href="javascript:void(0)">拒绝</a>
+					<?php elseif ($row["status"] == 1): ?>
+					<td>已通过</td>
+					<?php else: ?>
+					<td>未通过</td>
+					<?php endif; ?>
+				</tr>
+			<?php endforeach;?>
+		</table>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var key = "a_choice_";
+		$("a[id^="+key+"]").click(function(){
+			var id = 0;
+			var code = 0;
+			var s = $(this).attr("id");
+			if (s.match("agree")) {
+				code = 1;
+				id = s.substring("a_choice_agree_".length);
+			}
+			if (s.match("refuse")) {
+				code = 2;
+				id = s.substring("a_choice_refuse_".length);
+			}
+			$.get("/v1/marketing/check_draw_cash", {"id":id,"status":code},function(msg){
+				var tag = $("#td_choice_"+id);
+				if (msg == "SUCCESS") { 
+					tips = ["","已通过","未通过"];
+					tag.html(tips[code]);
+				} else {
+					alert(msg);
+				}
+			});
+		});
+	});
+</script>
+
+

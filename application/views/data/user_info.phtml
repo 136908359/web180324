@@ -1,0 +1,138 @@
+<div class="page-container">
+		<table class="table table-border table-bordered table-bg table-hover table-sort dataTable no-footer mt-20">
+			<thead>
+				<tr>
+					<th colspan="2" style="text-align:center">玩家信息</td>
+				</tr>
+				<tr>
+					<td class="text-r" style="width:200px">玩家ID</td>
+					<td ><?php echo @$uid;?></td>
+				</tr>
+				</tr>
+					<td class="text-r">昵称</td>
+					<td><?php echo @$user['nickname']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">金币</td>
+					<td><?php echo @$user['gold']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">钻石</td>
+					<td><?php echo @$user['diamond']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">房卡</td>
+					<td><?php echo @$user['score_card']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">对局数</td>
+					<td><?php echo @$user['play_times']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">今日对局数</td>
+					<td><?php echo @$user['today_play_times']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">7日对局数</td>
+					<td><?php echo @$user['day7_play_times']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">充值金额</td>
+					<td><?php echo @$user['pay_rmb']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">上级ID</td>
+					<td><?php echo @$user['parent_uid']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">代理等级</td>
+					<td><?php echo @$user['agent_level']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">最近登陆时间</td>
+					<td><?php echo @$user['enter_time']?></td>
+				</tr>
+				<tr>
+					<td class="text-r">注册时间</td>
+					<td><?php echo @$user['create_time']?></td>
+				</tr>
+		<?php if ( empty($share) == false): ?>
+		<tr>
+			<th colspan="2" style="text-align:center">推广信息</th>
+		</tr>
+		<tr>
+			<td class="text-r">真实姓名：</th>
+			<td><?php echo @$share['name']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">手机号：</th>
+			<td><?php echo @$share['phone']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">邀请码：</th>
+			<td><?php echo @$share['share_code']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">级别：</th>
+			<td><?php echo @$share['rank_name']; ?></td>
+		</tr>
+
+		<tr>
+			<td class="text-r">二级人数：</th>
+			<td><?php echo @$share['users_lv2']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">三级人数：</th>
+			<td><?php echo @$share['users_lv3']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">可用金额：</th>
+			<td><?php echo number_format(@$share['balance'],1); ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">累计收益：</th>
+			<td><?php echo number_format(@$share['total_rebate'],1); ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">本月收益：</th>
+			<td><?php echo number_format(@$share['month_rebate'],1); ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">提现中：</th>
+			<td><?php echo number_format(@$share['apply_rebate'],1); ?></td>
+		</tr>
+		<? endif; ?>
+		<? if ( empty($agent) == false ): ?>
+		<tr>
+			<th colspan="2" style="text-align:center">代理信息</th>
+		</tr>
+		<tr>
+			<td class="text-r">代理等级：</th>
+			<td><?php echo @$agent['agent_level']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">高级代理(可以给代理发房卡)：</th>
+			<?php if ( @$agent['high_agent'] ):?>
+			<td>是</td>
+			<?php else:?>
+			<td>否</td>
+			<?php endif;?>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="text-r">房卡库存：</th>
+			<td><?php echo @$agent['agent_card']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">游戏充卡总计：</th>
+			<td><?php echo @$agent['total_game_card']; ?></td>
+		</tr>
+		<tr>
+			<td class="text-r">代理充卡总计：</th>
+			<td><?php echo @$agent['total_agent_card']; ?></td>
+		</tr>
+		<?php endif; ?>
+		</thead>				
+	</table>
+</div>
+
